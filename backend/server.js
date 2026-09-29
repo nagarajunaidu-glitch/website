@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -10,17 +10,22 @@ app.use(express.json());
 
 // Basic health check endpoint
 app.get('/api/status', (req, res) => {
-  res.json({ status: 'Backend is running successfully!' });
+  res.json({ status: 'Backend is running successfully on Vercel Serverless!' });
 });
 
-// Example lead capture endpoint (to connect with frontend form later)
+// Lead capture endpoint
 app.post('/api/leads', (req, res) => {
   const leadData = req.body;
   console.log('Received new lead:', leadData);
-  // Here you would typically save to a database or CRM
+  // CRM / Database integration or email notification can be added here
   res.json({ success: true, message: 'Lead captured successfully', data: leadData });
 });
 
-app.listen(port, () => {
-  console.log(`🚀 Backend API running on http://localhost:${port}`);
-});
+// Listen locally if executed directly (e.g. npm run dev)
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`🚀 Backend API running on http://localhost:${port}`);
+  });
+}
+
+module.exports = app;

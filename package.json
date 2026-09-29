@@ -1,0 +1,14 @@
+{
+  "name": "digit-maxz",
+  "version": "1.0.0",
+  "description": "Digit Maxz - High converting AI and digital marketing website",
+  "main": "api/index.js",
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
