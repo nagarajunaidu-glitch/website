@@ -186,6 +186,15 @@ class LeadCaptureSystem {
       attribution: this.getAttributionData()
     };
 
+    // Send lead to Backend API
+    try {
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadRecord)
+      }).catch(err => console.log('API dispatch notice:', err));
+    } catch (e) {}
+
     // Save lead to LocalStorage (persists across sessions)
     try {
       const existingLeads = JSON.parse(localStorage.getItem('digitmaxz_leads') || '[]');
